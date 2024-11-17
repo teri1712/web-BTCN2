@@ -1,14 +1,15 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script>
 export default {
   data() {
     return {}
   },
   props: {
-    value: Boolean,
+    modelValue: Boolean,
   },
   methods: {
     updateTheme() {
-      this.$emit('input', !this.value)
+      this.$emit('update:modelValue', !this.modelValue)
     },
   },
 }
@@ -22,13 +23,13 @@ export default {
           type="checkbox"
           class="custom-control-input"
           id="switch-button"
-          :checked="value"
-          @click.prevent="updateTheme"
+          :checked="modelValue"
+          @change.prevent="updateTheme"
         />
         <label class="custom-control-label" for="switch-button">
           <i
-            :class="value ? 'fa-solid fa-moon' : 'fa-solid fa-gear'"
-            :style="{ color: value ? '#ffd43b' : 'black', 'vertical-align': 'bottom' }"
+            :class="modelValue ? 'fa-solid fa-moon' : 'fa-solid fa-gear'"
+            :style="{ color: modelValue ? '#ffd43b' : 'black', 'vertical-align': 'bottom' }"
           ></i>
         </label>
       </div>

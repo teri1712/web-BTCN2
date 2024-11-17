@@ -5,7 +5,9 @@ import Middle from './components/Middle.vue'
 import Footer from './components/Footer.vue'
 export default {
   data() {
-    return {}
+    return {
+      light_mode: true,
+    }
   },
   methods: {},
   components: {
@@ -17,7 +19,7 @@ export default {
 }
 </script>
 <template>
-  <Header />
+  <Header v-model="light_mode" />
   <Nav />
   <Middle />
   <Footer />
