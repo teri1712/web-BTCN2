@@ -1,24 +1,22 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script>
 import Revuenue from './Revenue.vue'
-import Popular from './Popular.vue'
-import Rating from './Rating.vue'
+import Fling from './Fling.vue'
 export default {
   data() {
     return {}
   },
   components: {
     Revuenue,
-    Popular,
-    Rating,
+    Fling,
   },
 }
 </script>
 <template>
   <div id="middle" class="m-1">
     <Revuenue />
-    <Popular />
-    <Rating />
+    <Fling section_name="Most Popular" />
+    <Fling section_name="Top Rating" />
   </div>
 </template>
 <style>

@@ -7,9 +7,9 @@ export default {
     this.top5_books = [
       '../../public/book1.jpg',
       '../../public/book2.jpeg',
-      '../../public/book1.jpg',
+      '../../public/harry-potter.jpg',
       '../../public/book2.jpeg',
-      '../../public/book1.jpg',
+      '../../public/harry-potter.jpg',
     ]
     return {
       current_book: '../../public/book1.jpg',
@@ -94,7 +94,6 @@ export default {
 }
 #show-book {
   flex: 1 0;
-  background: coral;
 }
 #show-book img {
   position: absolute;
@@ -102,8 +101,8 @@ export default {
 }
 #show-book div {
   position: relative;
-  height: 500px;
-  width: 323px;
+  height: 450px;
+  width: 290px;
   margin: 0 auto;
 }
 #main-book {

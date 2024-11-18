@@ -9,6 +9,7 @@ body {
   margin-left: 50px;
   margin-right: 50px;
   height: 100%;
+  overflow-x: hidden;
 }
 html {
   width: 100%;
