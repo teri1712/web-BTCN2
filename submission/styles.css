@@ -240,3 +240,70 @@ label {
 .search-container {
   float: right;
 }
+
+/*Revenue*/
+
+.book-info {
+  margin-bottom: 40px;
+  bottom: 0;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  left: 0;
+  color: yellow;
+  z-index: 3;
+}
+.book-info-title {
+  font-size: 1.5em;
+  font-weight: 600;
+  bottom: 60px;
+}
+.book-info-genre {
+  font-size: 1em;
+  bottom: 40px;
+}
+.book-info-rating {
+  font-size: 1.1em;
+  font-style: italic;
+  bottom: 20px;
+}
+.book-info-runtime {
+  font-size: 1em;
+  font-style: italic;
+}
+.revenue {
+  display: flex;
+  align-items: center;
+  padding-left: 50px;
+  padding-right: 50px;
+  flex: 1 1;
+}
+#show-book {
+  flex: 1 0;
+  cursor: pointer;
+}
+#show-book img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+#show-book div {
+  position: relative;
+  height: 400px;
+  width: 290px;
+  margin: 0 auto;
+}
+#main-book {
+  z-index: 1;
+}
+#dummy-book {
+  z-index: 2;
+}
+#back,
+#next {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 50px;
+}
