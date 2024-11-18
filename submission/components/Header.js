@@ -1,5 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
-<script>
 export default {
   data() {
     return {}
@@ -12,9 +10,7 @@ export default {
       this.$emit('update:modelValue', !this.modelValue)
     },
   },
-}
-</script>
-<template>
+  template: `
   <div
     id="header"
     class="m-1 rounded border"
@@ -55,36 +51,5 @@ export default {
     >
       Movies Info
     </h3>
-  </div>
-</template>
-<style>
-#header {
-  padding-left: 10px;
-  padding-right: 10px;
-  flex: 0 0 50px;
-  line-height: 50px;
+  </div>`,
 }
-.movie-info {
-  margin: 0 auto;
-  width: 200px;
-  line-height: 50px;
-  text-align: center;
-  clear: none;
-  font-weight: 600;
-}
-label {
-  line-height: 20px;
-  vertical-align: bottom;
-}
-.mssv {
-  float: left;
-}
-.switch-container {
-  float: right;
-}
-.switch-inner-container {
-  vertical-align: middle;
-  display: inline-block;
-  height: 20px;
-}
-</style>

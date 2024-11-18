@@ -1,6 +1,6 @@
 import dbFetch from '../db/provider'
 
-const ActorDetail = {
+export default {
   props: ['info'],
   data() {
     return {
