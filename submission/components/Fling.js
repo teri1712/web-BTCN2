@@ -1,5 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
-<script>
 import ZoomOutImg from './ImgZoomOut.vue'
 import dbFetch from '../db/provider'
 export default {
@@ -69,9 +67,8 @@ export default {
       }, 10)
     },
   },
-}
-</script>
-<template>
+  template: `
+  
   <div class="fling-container mb-4">
     <p
       class="fs-5 mb-1"
@@ -129,60 +126,5 @@ export default {
         <i class="fa-solid fa-angle-right"></i>
       </div>
     </div>
-  </div>
-</template>
-<style>
-.fling-container {
-  flex: 0 0 200px;
-  display: flex;
-  flex-direction: column;
+  </div>`,
 }
-.fling-container p {
-  font-weight: 600;
-  font-size: 1.2em;
-}
-.fling {
-  flex: 1 0;
-  display: flex;
-  align-items: center;
-}
-.film-container {
-  flex: 1 0;
-  height: 180px;
-  position: relative;
-}
-.film-list {
-  display: flex;
-  position: relative;
-  z-index: 1;
-}
-.film-list-clone {
-  display: inline-block;
-  width: 100%;
-  margin-right: 20px;
-}
-.film-fling {
-  top: 0;
-  position: absolute;
-  height: 100%;
-  white-space: nowrap;
-  overflow-x: visible;
-  width: 100%;
-  z-index: 2;
-}
-.film-list img {
-  height: 180px;
-  flex: 1 0;
-}
-#back,
-#next {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 50px;
-}
-.film-fling img {
-  margin: 1px;
-}
-</style>
