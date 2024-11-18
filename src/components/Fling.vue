@@ -1,8 +1,10 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script>
+import ZoomOutImg from './ImgZoomOut.vue'
 export default {
   props: {
     section_name: String,
+    zIndex: Number,
   },
   data() {
     this.films = [
@@ -22,6 +24,9 @@ export default {
       fling_right_visible: true,
       fling_translation: 0,
     }
+  },
+  components: {
+    ZoomOutImg,
   },
   methods: {
     getDifWidth() {
@@ -61,17 +66,23 @@ export default {
 }
 </script>
 <template>
-  <div class="popular-container mb-1">
+  <div class="popular-container mb-4">
     <p class="fs-5 mb-1">{{ section_name }}</p>
     <div class="popular">
       <div id="back" @click="performFling(-3)">
         <i class="fa-solid fa-angle-left"></i>
       </div>
-      <div class="film-container" ref="film_container">
+      <div
+        class="film-container"
+        ref="film_container"
+        :style="{
+          'z-index': zIndex,
+        }"
+      >
         <div class="film-list" v-if="!fling_visible">
-          <img :src="films[current_index]" />
-          <img :src="films[current_index + 1]" />
-          <img :src="films[current_index + 2]" />
+          <ZoomOutImg :imageUrl="films[current_index]" book_name="harry potter" />
+          <ZoomOutImg :imageUrl="films[current_index + 1]" />
+          <ZoomOutImg :imageUrl="films[current_index + 2]" />
         </div>
 
         <div class="film-fling" :style="{ left: fling_translation + 'px' }" v-else>
@@ -108,6 +119,10 @@ export default {
   flex: 0 0 200px;
   display: flex;
   flex-direction: column;
+}
+.popular-container p {
+  font-weight: 600;
+  font-size: 1.2em;
 }
 .popular {
   flex: 1 0;
@@ -149,5 +164,8 @@ export default {
   align-items: center;
   justify-content: center;
   flex: 0 0 50px;
+}
+.film-fling img {
+  margin: 1px;
 }
 </style>

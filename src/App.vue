@@ -24,3 +24,5 @@ export default {
   <Middle />
   <Footer />
 </template>
+
+<style></style>

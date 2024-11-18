@@ -6,5 +6,5 @@ export default {
 }
 </script>
 <template>
-  <div id="footer" class="m-1"></div>
+  <div id="footer" class="m-1 mb-4"></div>
 </template>

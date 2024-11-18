@@ -101,7 +101,7 @@ export default {
 }
 #show-book div {
   position: relative;
-  height: 450px;
+  height: 400px;
   width: 290px;
   margin: 0 auto;
 }

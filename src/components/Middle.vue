@@ -15,8 +15,8 @@ export default {
 <template>
   <div id="middle" class="m-1">
     <Revuenue />
-    <Fling section_name="Most Popular" />
-    <Fling section_name="Top Rating" />
+    <Fling section_name="Most Popular" zIndex="2" />
+    <Fling section_name="Top Rating" zIndex="1" />
   </div>
 </template>
 <style>
