@@ -1,5 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
-<script>
 import Revuenue from './Revenue.vue'
 import Fling from './Fling'
 export default {
@@ -13,9 +11,7 @@ export default {
     Revuenue,
     Fling,
   },
-}
-</script>
-<template>
+  template: `
   <div id="main-content" class="m-1">
     <Revuenue />
     <Fling
@@ -30,12 +26,5 @@ export default {
       section_url="get/mostpopular/"
       :light_mode="light_mode"
     />
-  </div>
-</template>
-<style>
-#main-content {
-  flex: 1 0;
-  display: flex;
-  flex-direction: column;
+  </div>`,
 }
-</style>
