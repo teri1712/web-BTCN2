@@ -9,6 +9,7 @@ export default {
       info: null,
     }
   },
+  inject: ['onViewActor'],
   methods: {
     async loadInfo() {
       this.info = (await dbFetch('detail/movie/' + this.movieId)).detail
@@ -48,7 +49,7 @@ export default {
     <div class="cast">
       <h4 style="font-weight: 600">Diễn viên</h4>
       <ul>
-        <li v-for="(actor, index) in info.actorList" :key="index">
+        <li v-for="(actor, index) in info.actorList" :key="index" @click="onViewActor(actor)">
           <strong>{{ actor.name }}:</strong> {{ actor.asCharacter }}
         </li>
       </ul>
@@ -104,6 +105,10 @@ export default {
 .cast,
 .review li {
   margin-bottom: 5px;
+}
+
+.cast li {
+  cursor: pointer;
 }
 .review strong {
   font-style: italic;

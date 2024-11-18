@@ -40,6 +40,8 @@ export default {
         <img class="mb-1" :src="book.image" />
         <p class="element-title">{{ book.fullTitle }}</p>
         <p class="element-type">{{ book.genre }}</p>
+        <p class="element-type">Rating: {{ book.ratings.imDb }}</p>
+        <p class="element-type">{{ book.runtimeStr }}</p>
       </div>
     </div>
   </div>

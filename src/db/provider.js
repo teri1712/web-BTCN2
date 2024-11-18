@@ -18,6 +18,20 @@ function prepareMovie(movie) {
   movie.director = movie.directorList.map((item) => item.name)
 }
 
+async function prepareActor(actor) {
+  actor.movies = []
+  const movies = await moviesData
+  for (let i = 0; i < actor.castMovies.length; i++) {
+    const movieId = actor.castMovies[i].id
+    for (let j = 0; j < movies.length; j++) {
+      if (movies[j].id === movieId) {
+        actor.movies.push(movies[j])
+        break
+      }
+    }
+  }
+}
+
 async function prepareReviews(movie) {
   const reviews = await reviewsData
   let movie_reviews = []
@@ -134,16 +148,28 @@ export default async function dbFetch(url) {
       result.items = top5Revenue
     }
   } else if (type === 'detail') {
-    const movies = await moviesData
+    if (className === 'movie') {
+      const movies = await moviesData
 
-    result.id = pattern
-    result.detail = null
-    for (let i = 0; i < movies.length; i++) {
-      if (movies[i].id === pattern) {
-        prepareMovie(movies[i])
-        prepareReviews(movies[i])
-        result.detail = movies[i]
-        break
+      result.id = pattern
+      result.detail = null
+      for (let i = 0; i < movies.length; i++) {
+        if (movies[i].id === pattern) {
+          prepareMovie(movies[i])
+          prepareReviews(movies[i])
+          result.detail = movies[i]
+          break
+        }
+      }
+    } else if (className === 'actor') {
+      const actors = await namesData
+      result.items = []
+      for (let i = 0; i < actors.length; i++) {
+        if (actors[i].id === pattern) {
+          prepareActor(actors[i])
+          result.detail = actors[i]
+          break
+        }
       }
     }
   }
