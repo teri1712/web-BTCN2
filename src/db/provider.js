@@ -6,14 +6,19 @@ async function downloadData(path) {
   }
   return await response.json()
 }
-
+let top5Revenue = null
 const moviesData = downloadData('Movies')
 const namesData = downloadData('Names')
 const reviewsData = downloadData('Reviews')
 const top50Data = downloadData('Top50Movies')
 const popularsData = downloadData('MostPopularMovies')
 
+function prepareMovie(movie) {
+  movie.genre = movie.genreList.map((item) => item.key)
+}
+
 export default async function dbFetch(url) {
+  console.log(url)
   const [path, query] = url.split('?')
   const [type, className, pattern] = path.split('/')
   const params = {}
@@ -40,6 +45,7 @@ export default async function dbFetch(url) {
       for (let i = 0; i < movies.length; i++) {
         let regex = new RegExp(pattern)
         if (regex.test(movies[i].title)) {
+          prepareMovie(movies[i])
           filtered.push(movies[i])
         }
       }
@@ -94,13 +100,34 @@ export default async function dbFetch(url) {
       for (let i = offset; i < Math.min(populars.length, offset + per_page); i++) {
         result.items.push(populars[i])
       }
+    } else if (className === 'top5revenue') {
+      const movies = await moviesData
+      if (top5Revenue == null) {
+        top5Revenue = [...movies]
+        top5Revenue.sort((a, b) => {
+          let revenueA = !a.boxOffice
+            ? -1
+            : parseFloat(a.boxOffice.cumulativeWorldwideGross.replace(/[$,]/g, ''))
+          let revenueB = !b.boxOffice
+            ? -1
+            : parseFloat(b.boxOffice.cumulativeWorldwideGross.replace(/[$,]/g, ''))
+          return revenueB - revenueA
+        })
+        top5Revenue = top5Revenue.slice(0, 5)
+        for (let i = 0; i < 5; i++) {
+          prepareMovie(top5Revenue[i])
+        }
+      }
+      result.items = top5Revenue
     }
   } else if (type === 'detail') {
     const movies = await moviesData
+
     result.id = pattern
     result.detail = null
     for (let i = 0; i < movies.length; i++) {
       if (movies[i].id === pattern) {
+        prepareMovie(movies[i])
         result.detail = movies[i]
         break
       }

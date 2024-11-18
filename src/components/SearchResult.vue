@@ -1,35 +1,28 @@
 <script>
+import dbFetch from '../db/provider'
 export default {
+  props: ['query'],
   data() {
     return {
-      book_list: [
-        {
-          url: '../../public/book1.jpg',
-          title: 'Harry Potter',
-          types: '[Comedy,Comedy]',
-        },
-        {
-          url: '../../public/book1.jpg',
-          title: 'Harry Potter',
-          types: '[Comedy,Comedy]',
-        },
-        {
-          url: '../../public/book1.jpg',
-          title: 'Harry Potter',
-          types: '[Comedy,Comedy]',
-        },
-        {
-          url: '../../public/book1.jpg',
-          title: 'Harry Potter',
-          types: '[Comedy,Comedy]',
-        },
-        {
-          url: '../../public/book1.jpg',
-          title: 'Harry Potter',
-          types: '[Comedy,Comedy]',
-        },
-      ],
+      book_list: [],
     }
+  },
+  methods: {
+    async applyResult() {
+      console.log(this.query)
+      const asyncFetch = await dbFetch('search/movie/' + this.query + '?page=1&per_page=6')
+      this.book_list = asyncFetch.items
+    },
+  },
+  mounted() {
+    this.applyResult()
+  },
+  watch: {
+    query(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.applyResult()
+      }
+    },
   },
 }
 </script>
@@ -37,10 +30,10 @@ export default {
 <template>
   <div class="search-result">
     <div class="film-grid">
-      <div class="book-element pb-1 c border" v-for="(book, index) in book_list" :key="index">
-        <img class="mb-1" :src="book.url" />
-        <p class="element-title">{{ book.title }}</p>
-        <p class="element-type">{{ book.types }}</p>
+      <div class="book-element pb-1 rounded border" v-for="(book, index) in book_list" :key="index">
+        <img class="mb-1" :src="book.image" />
+        <p class="element-title">{{ book.fullTitle }}</p>
+        <p class="element-type">{{ book.genre }}</p>
       </div>
     </div>
   </div>

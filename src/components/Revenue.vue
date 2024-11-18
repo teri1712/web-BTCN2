@@ -1,27 +1,33 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script>
+import dbFetch from '../db/provider'
+
 export default {
   data() {
     this.dummy_book_interval = null
-    this.current_index = 0
-    this.top5_books = [
-      '../../public/book1.jpg',
-      '../../public/book2.jpeg',
-      '../../public/harry-potter.jpg',
-      '../../public/book2.jpeg',
-      '../../public/harry-potter.jpg',
-    ]
+    this.top5_books = []
     return {
-      current_book: '../../public/book1.jpg',
-      dummy_book: '../../public/book2.jpeg',
+      current_index: -1,
+      dummy_index: -1,
       dummy_book_opacity: 0,
       main_book_opacity: 1,
     }
   },
+  mounted() {
+    this.fetchItems()
+  },
   methods: {
-    performSwitchBook(next_book) {
-      this.dummy_book = this.current_book
-      this.current_book = next_book
+    async fetchItems() {
+      this.top5_books = (await dbFetch('get/top5revenue')).items
+      if (this.top5_books.length === 0) {
+        return
+      }
+      this.current_index = 0
+      this.dummy_index = 0
+    },
+    performSwitchBook(index) {
+      this.dummy_index = this.current_index
+      this.current_index = index
 
       this.dummy_book_opacity = 1
       this.main_book_opacity = 0.2
@@ -40,18 +46,18 @@ export default {
       }, 20)
     },
     switchNextBook() {
-      this.current_index++
-      if (this.current_index === 5) {
-        this.current_index = 0
+      let index = this.current_index + 1
+      if (index === 5) {
+        index = 0
       }
-      this.performSwitchBook(this.top5_books[this.current_index])
+      this.performSwitchBook(index)
     },
     switchPrevBook() {
-      this.current_index--
-      if (this.current_index === -1) {
-        this.current_index = 4
+      let index = this.current_index - 1
+      if (index === -1) {
+        index = 4
       }
-      this.performSwitchBook(this.top5_books[this.current_index])
+      this.performSwitchBook(index)
     },
   },
 }
@@ -61,23 +67,25 @@ export default {
     <div id="back" @click="switchPrevBook">
       <i class="fa-solid fa-angle-left"></i>
     </div>
-    <div id="show-book">
+    <div id="show-book" v-if="current_index != -1">
       <div>
         <img
           class="rounded border"
           id="main-book"
-          :src="current_book"
+          :src="top5_books[current_index].image"
           :style="{
             opacity: main_book_opacity,
           }"
         />
         <img
           id="dummy-book"
-          :src="dummy_book"
+          :src="top5_books[dummy_index].image"
           :style="{
             opacity: dummy_book_opacity,
           }"
         />
+        <p class="book-info book-info-title">{{ top5_books[current_index].fullTitle }}</p>
+        <p class="book-info book-info-genre">{{ top5_books[current_index].genre }}</p>
       </div>
     </div>
     <div id="next" @click="switchNextBook">
@@ -86,6 +94,24 @@ export default {
   </div>
 </template>
 <style>
+.book-info {
+  margin-bottom: 40px;
+  bottom: 0;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  left: 0;
+  color: yellow;
+  z-index: 3;
+}
+.book-info-title {
+  font-size: 1.5em;
+  font-weight: 600;
+  bottom: 20px;
+}
+.book-info-genre {
+  font-size: 1em;
+}
 .revenue {
   display: flex;
   align-items: center;
@@ -99,6 +125,7 @@ export default {
 #show-book img {
   position: absolute;
   height: 100%;
+  width: 100%;
 }
 #show-book div {
   position: relative;

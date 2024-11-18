@@ -1,11 +1,3 @@
-body {
-  display: flex;
-  flex-direction: column;
-  margin-left: 50px;
-  margin-right: 50px;
-  height: 100%;
-  overflow-x: hidden;
-}
 html {
   width: 100%;
   height: 100%;
@@ -16,5 +8,6 @@ html {
     width: 924px;
     margin-left: auto;
     margin-right: auto;
+    background: none;
   }
 }

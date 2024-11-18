@@ -15,8 +15,21 @@ export default {
 }
 </script>
 <template>
-  <div id="header" class="m-1 rounded border">
-    <div class="mssv">20120220</div>
+  <div
+    id="header"
+    class="m-1 rounded border"
+    :style="{
+      backgroundColor: !modelValue ? 'darkred' : 'rgb(241, 188, 188)',
+    }"
+  >
+    <div
+      class="mssv"
+      :style="{
+        color: !modelValue ? 'rgb(241, 188, 188)' : 'grey',
+      }"
+    >
+      20120220
+    </div>
     <div class="switch-container">
       <div class="custom-control custom-switch switch-inner-container">
         <input
@@ -28,13 +41,20 @@ export default {
         />
         <label class="custom-control-label" for="switch-button">
           <i
-            :class="modelValue ? 'fa-solid fa-moon' : 'fa-solid fa-gear'"
-            :style="{ color: modelValue ? '#ffd43b' : 'black', 'vertical-align': 'bottom' }"
+            :class="!modelValue ? 'fa-solid fa-moon' : 'fa-solid fa-gear'"
+            :style="{ color: !modelValue ? '#ffd43b' : 'black', 'vertical-align': 'bottom' }"
           ></i>
         </label>
       </div>
     </div>
-    <h3 class="movie-info">Movies Info</h3>
+    <h3
+      class="movie-info"
+      :style="{
+        color: !modelValue ? 'rgb(241, 188, 188)' : 'black',
+      }"
+    >
+      Movies Info
+    </h3>
   </div>
 </template>
 <style>
@@ -42,7 +62,6 @@ export default {
   padding-left: 10px;
   padding-right: 10px;
   flex: 0 0 50px;
-  background-color: rgb(241, 188, 188);
   line-height: 50px;
 }
 .movie-info {
@@ -59,7 +78,6 @@ label {
 }
 .mssv {
   float: left;
-  color: gray;
 }
 .switch-container {
   float: right;

@@ -1,24 +1,20 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script>
 import ZoomOutImg from './ImgZoomOut.vue'
+import dbFetch from '../db/provider'
 export default {
   props: {
+    section_url: String,
     section_name: String,
     zIndex: Number,
+    light_mode: Boolean,
   },
   data() {
-    this.films = [
-      '../../public/book1.jpg',
-      '../../public/book1.jpg',
-      '../../public/book1.jpg',
-      '../../public/harry-potter.jpg',
-      '../../public/harry-potter.jpg',
-      '../../public/book2.jpeg',
-    ]
+    this.films = []
     this.fling_interval = null
     return {
-      current_index: 0,
-      fling_index: 0,
+      current_index: -1,
+      fling_index: -1,
       fling_visible: false,
       fling_left_visible: true,
       fling_right_visible: true,
@@ -28,7 +24,17 @@ export default {
   components: {
     ZoomOutImg,
   },
+  mounted() {
+    this.fetchItems()
+  },
   methods: {
+    async fetchItems() {
+      this.films = (await dbFetch(this.section_url + '?per_page=15&page=1')).items
+      if (this.films.length === 0) {
+        return
+      }
+      this.current_index = 0
+    },
     getDifWidth() {
       return this.$refs.film_container.clientWidth + 20
     },
@@ -66,9 +72,16 @@ export default {
 }
 </script>
 <template>
-  <div class="popular-container mb-4">
-    <p class="fs-5 mb-1">{{ section_name }}</p>
-    <div class="popular">
+  <div class="fling-container mb-4">
+    <p
+      class="fs-5 mb-1"
+      :style="{
+        color: light_mode ? 'black' : 'white',
+      }"
+    >
+      {{ section_name }}
+    </p>
+    <div class="fling">
       <div id="back" @click="performFling(-3)">
         <i class="fa-solid fa-angle-left"></i>
       </div>
@@ -79,21 +92,34 @@ export default {
           'z-index': zIndex,
         }"
       >
-        <div class="film-list" v-if="!fling_visible">
-          <ZoomOutImg :imageUrl="films[current_index]" book_name="harry potter" />
-          <ZoomOutImg :imageUrl="films[current_index + 1]" />
-          <ZoomOutImg :imageUrl="films[current_index + 2]" />
+        <div class="film-list" v-if="!fling_visible && current_index != -1">
+          <ZoomOutImg
+            :imageUrl="films[current_index].image"
+            :book_name="films[current_index].title"
+          />
+          <ZoomOutImg
+            :imageUrl="films[current_index + 1].image"
+            :book_name="films[current_index + 1].title"
+          />
+          <ZoomOutImg
+            :imageUrl="films[current_index + 2].image"
+            :book_name="films[current_index + 2].title"
+          />
         </div>
 
-        <div class="film-fling" :style="{ left: fling_translation + 'px' }" v-else>
+        <div
+          class="film-fling"
+          :style="{ left: fling_translation + 'px' }"
+          v-if="fling_visible && fling_index != -1"
+        >
           <div
             class="film-list-clone"
             :style="{ visibility: fling_left_visible ? 'visible' : 'hidden' }"
           >
             <div class="film-list">
-              <img class="rounded border" :src="films[fling_index]" />
-              <img class="rounded border" :src="films[fling_index + 1]" />
-              <img class="rounded border" :src="films[fling_index + 2]" />
+              <img class="rounded border" :src="films[fling_index].image" />
+              <img class="rounded border" :src="films[fling_index + 1].image" />
+              <img class="rounded border" :src="films[fling_index + 2].image" />
             </div>
           </div>
           <div
@@ -101,9 +127,9 @@ export default {
             :style="{ visibility: fling_right_visible ? 'visible' : 'hidden' }"
           >
             <div class="film-list">
-              <img class="rounded border" :src="films[fling_index + 3]" />
-              <img class="rounded border" :src="films[fling_index + 4]" />
-              <img class="rounded border" :src="films[fling_index + 5]" />
+              <img class="rounded border" :src="films[fling_index + 3].image" />
+              <img class="rounded border" :src="films[fling_index + 4].image" />
+              <img class="rounded border" :src="films[fling_index + 5].image" />
             </div>
           </div>
         </div>
@@ -115,16 +141,16 @@ export default {
   </div>
 </template>
 <style>
-.popular-container {
+.fling-container {
   flex: 0 0 200px;
   display: flex;
   flex-direction: column;
 }
-.popular-container p {
+.fling-container p {
   font-weight: 600;
   font-size: 1.2em;
 }
-.popular {
+.fling {
   flex: 1 0;
   display: flex;
   align-items: center;
