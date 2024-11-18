@@ -1,8 +1,6 @@
-<!-- eslint-disable vue/multi-word-component-names -->
-<script>
 import dbFetch from '../db/provider'
 
-export default {
+const ActorDetail = {
   props: ['info'],
   data() {
     return {
@@ -25,9 +23,7 @@ export default {
       }
     },
   },
-}
-</script>
-<template>
+  template: `
   <div class="actor-container" v-if="info != null">
     <div class="actor-header">
       <img class="actor-poster" :src="info.image" alt="Không thể truy cập link ảnh" />
@@ -44,44 +40,5 @@ export default {
         </li>
       </ul>
     </div>
-  </div>
-</template>
-
-<style>
-.actor-container {
-  margin: auto;
-  padding: 20px;
+  </div>`,
 }
-.actor-header {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 20px;
-}
-.actor-poster {
-  width: 300px;
-  height: 450px;
-  background-color: aqua;
-  object-fit: cover;
-}
-.actor-detail {
-  margin-left: 30px;
-  flex: 1;
-}
-.actor-detail h1 {
-  margin-top: 0;
-  font-weight: 600;
-}
-.genre {
-  color: #888;
-}
-.cast {
-  margin-top: 30px;
-}
-.cast ul {
-  list-style-type: none;
-  padding: 0;
-}
-.cast li {
-  margin-bottom: 5px;
-}
-</style>

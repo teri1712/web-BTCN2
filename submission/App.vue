@@ -1,11 +1,11 @@
 <script>
-import Header from './components/Header.vue'
-import Nav from './components/Nav.vue'
-import MainContent from './components/MainContent.vue'
-import Footer from './components/Footer.vue'
-import SearchResult from './components/SearchResult.vue'
-import MovieDetail from './components/MovieDetail.vue'
-import ActorDetail from './components/ActorDetail.vue'
+import Header from '../src/components/Header.vue'
+import Nav from '../src/components/Nav.vue'
+import MainContent from '../src/components/MainContent.vue'
+import Footer from '../src/components/Footer.vue'
+import SearchResult from '../src/components/SearchResult.vue'
+import MovieDetail from '../src/components/MovieDetail.vue'
+import ActorDetail from '../src/components/ActorDetail.vue'
 
 export default {
   data() {
