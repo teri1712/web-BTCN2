@@ -7,10 +7,8 @@ export default {
       info_scale: 1,
     }
   },
-  props: {
-    book_name: String,
-    imageUrl: String,
-  },
+  inject: ['onViewMovie'],
+  props: ['book'],
   methods: {
     openViewInfo() {
       if (this.view_info_interval != null) {
@@ -45,8 +43,13 @@ export default {
 </script>
 
 <template>
-  <div class="zoom-out" @mouseenter="openViewInfo" @mouseleave="closeViewInfo">
-    <img class="rounded border" :src="imageUrl" />
+  <div
+    class="zoom-out"
+    @mouseenter="openViewInfo"
+    @mouseleave="closeViewInfo"
+    @click="onViewMovie(book.id)"
+  >
+    <img class="rounded border" :src="book.image" />
     <div
       class="img-info rounded border"
       v-if="viewInfo"
@@ -54,8 +57,8 @@ export default {
         transform: 'scale(' + info_scale + ')',
       }"
     >
-      <img :src="imageUrl" />
-      <p>{{ book_name }}</p>
+      <img :src="book.image" />
+      <p>{{ book.title }}</p>
     </div>
   </div>
 </template>
@@ -65,6 +68,7 @@ export default {
   height: 180px;
   flex: 1 0;
   margin: 1px;
+  cursor: pointer;
   position: relative;
 }
 .zoom-out img {

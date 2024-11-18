@@ -16,12 +16,15 @@ export default {
   mounted() {
     this.fetchItems()
   },
+  inject: ['onViewMovie'],
+
   methods: {
     async fetchItems() {
       this.top5_books = (await dbFetch('get/top5revenue')).items
       if (this.top5_books.length === 0) {
         return
       }
+      console.log(this.top5_books)
       this.current_index = 0
       this.dummy_index = 0
     },
@@ -67,7 +70,11 @@ export default {
     <div id="back" @click="switchPrevBook">
       <i class="fa-solid fa-angle-left"></i>
     </div>
-    <div id="show-book" v-if="current_index != -1">
+    <div
+      id="show-book"
+      v-if="current_index != -1"
+      @click="onViewMovie(top5_books[current_index].id)"
+    >
       <div>
         <img
           class="rounded border"
@@ -86,6 +93,12 @@ export default {
         />
         <p class="book-info book-info-title">{{ top5_books[current_index].fullTitle }}</p>
         <p class="book-info book-info-genre">{{ top5_books[current_index].genre }}</p>
+        <p class="book-info book-info-rating">
+          Rating: {{ top5_books[current_index].ratings.imDb }}
+        </p>
+        <p class="book-info book-info-runtime">
+          Length: {{ top5_books[current_index].runtimeStr }}
+        </p>
       </div>
     </div>
     <div id="next" @click="switchNextBook">
@@ -107,10 +120,20 @@ export default {
 .book-info-title {
   font-size: 1.5em;
   font-weight: 600;
-  bottom: 20px;
+  bottom: 60px;
 }
 .book-info-genre {
   font-size: 1em;
+  bottom: 40px;
+}
+.book-info-rating {
+  font-size: 1.1em;
+  font-style: italic;
+  bottom: 20px;
+}
+.book-info-runtime {
+  font-size: 1em;
+  font-style: italic;
 }
 .revenue {
   display: flex;
@@ -121,6 +144,7 @@ export default {
 }
 #show-book {
   flex: 1 0;
+  cursor: pointer;
 }
 #show-book img {
   position: absolute;

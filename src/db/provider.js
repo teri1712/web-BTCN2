@@ -15,6 +15,19 @@ const popularsData = downloadData('MostPopularMovies')
 
 function prepareMovie(movie) {
   movie.genre = movie.genreList.map((item) => item.key)
+  movie.director = movie.directorList.map((item) => item.name)
+}
+
+async function prepareReviews(movie) {
+  const reviews = await reviewsData
+  let movie_reviews = []
+  for (let i = 0; i < reviews.length; i++) {
+    if (reviews[i].movieId === movie.id) {
+      movie_reviews = reviews[i].items
+      break
+    }
+  }
+  movie.reviews = movie_reviews
 }
 
 export default async function dbFetch(url) {
@@ -128,6 +141,7 @@ export default async function dbFetch(url) {
     for (let i = 0; i < movies.length; i++) {
       if (movies[i].id === pattern) {
         prepareMovie(movies[i])
+        prepareReviews(movies[i])
         result.detail = movies[i]
         break
       }

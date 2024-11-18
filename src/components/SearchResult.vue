@@ -7,6 +7,7 @@ export default {
       book_list: [],
     }
   },
+  inject: ['onViewMovie'],
   methods: {
     async applyResult() {
       console.log(this.query)
@@ -30,7 +31,12 @@ export default {
 <template>
   <div class="search-result">
     <div class="film-grid">
-      <div class="book-element pb-1 rounded border" v-for="(book, index) in book_list" :key="index">
+      <div
+        class="book-element pb-1 rounded border"
+        v-for="(book, index) in book_list"
+        :key="index"
+        @click="onViewMovie(book.id)"
+      >
         <img class="mb-1" :src="book.image" />
         <p class="element-title">{{ book.fullTitle }}</p>
         <p class="element-type">{{ book.genre }}</p>
@@ -54,6 +60,7 @@ export default {
 }
 .book-element img {
   width: 100%;
+  cursor: pointer;
 }
 .element-title {
   font-size: 1.2em;

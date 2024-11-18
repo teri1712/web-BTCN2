@@ -4,21 +4,36 @@ import Nav from './components/Nav.vue'
 import MainContent from './components/MainContent.vue'
 import Footer from './components/Footer.vue'
 import SearchResult from './components/SearchResult.vue'
+import MovieDetail from './components/MovieDetail.vue'
 
 export default {
   data() {
     return {
       light_mode: true,
       searchQuery: null,
+      movieId: null,
+    }
+  },
+  provide() {
+    return {
+      onViewMovie: this.handleViewMovie,
     }
   },
   methods: {
     handleSearch(pattern) {
-      if (pattern == null) {
-        this.searchQuery = null
+      if (pattern.length === 0) {
         return
       }
       this.searchQuery = pattern
+      this.movieId = null
+    },
+    handleHomePressed() {
+      this.searchQuery = null
+      this.movieId = null
+    },
+    handleViewMovie(movie) {
+      this.searchQuery = null
+      this.movieId = movie
     },
   },
   components: {
@@ -27,6 +42,7 @@ export default {
     MainContent,
     Footer,
     SearchResult,
+    MovieDetail,
   },
   watch: {
     light_mode(light) {
@@ -38,9 +54,10 @@ export default {
 <template>
   <div id="app">
     <Header v-model="light_mode" />
-    <Nav @searchAction="handleSearch" :light_mode="light_mode" />
+    <Nav @searchAction="handleSearch" @onHomePressed="handleHomePressed" :light_mode="light_mode" />
+    <MainContent v-if="searchQuery == null && movieId == null" :light_mode="light_mode" />
     <SearchResult v-if="searchQuery != null" :query="searchQuery" />
-    <MainContent v-else :light_mode="light_mode" />
+    <MovieDetail v-if="movieId != null" :movieId="movieId" />
     <Footer :light_mode="light_mode" />
   </div>
 </template>

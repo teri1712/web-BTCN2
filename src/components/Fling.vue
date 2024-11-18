@@ -10,7 +10,7 @@ export default {
     light_mode: Boolean,
   },
   data() {
-    this.films = []
+    this.movies = []
     this.fling_interval = null
     return {
       current_index: -1,
@@ -29,8 +29,8 @@ export default {
   },
   methods: {
     async fetchItems() {
-      this.films = (await dbFetch(this.section_url + '?per_page=15&page=1')).items
-      if (this.films.length === 0) {
+      this.movies = (await dbFetch(this.section_url + '?per_page=15&page=1')).items
+      if (this.movies.length === 0) {
         return
       }
       this.current_index = 0
@@ -41,7 +41,7 @@ export default {
     performFling(amount) {
       const index = this.current_index + amount
 
-      if (index < 0 || index >= this.films.length || this.fling_interval != null) return
+      if (index < 0 || index >= this.movies.length || this.fling_interval != null) return
       this.fling_index = amount < 0 ? index : this.current_index
       this.current_index = index
       this.fling_visible = true
@@ -93,18 +93,9 @@ export default {
         }"
       >
         <div class="film-list" v-if="!fling_visible && current_index != -1">
-          <ZoomOutImg
-            :imageUrl="films[current_index].image"
-            :book_name="films[current_index].title"
-          />
-          <ZoomOutImg
-            :imageUrl="films[current_index + 1].image"
-            :book_name="films[current_index + 1].title"
-          />
-          <ZoomOutImg
-            :imageUrl="films[current_index + 2].image"
-            :book_name="films[current_index + 2].title"
-          />
+          <ZoomOutImg :book="movies[current_index]" />
+          <ZoomOutImg :book="movies[current_index + 1]" />
+          <ZoomOutImg :book="movies[current_index + 2]" />
         </div>
 
         <div
@@ -117,9 +108,9 @@ export default {
             :style="{ visibility: fling_left_visible ? 'visible' : 'hidden' }"
           >
             <div class="film-list">
-              <img class="rounded border" :src="films[fling_index].image" />
-              <img class="rounded border" :src="films[fling_index + 1].image" />
-              <img class="rounded border" :src="films[fling_index + 2].image" />
+              <img class="rounded border" :src="movies[fling_index].image" />
+              <img class="rounded border" :src="movies[fling_index + 1].image" />
+              <img class="rounded border" :src="movies[fling_index + 2].image" />
             </div>
           </div>
           <div
@@ -127,9 +118,9 @@ export default {
             :style="{ visibility: fling_right_visible ? 'visible' : 'hidden' }"
           >
             <div class="film-list">
-              <img class="rounded border" :src="films[fling_index + 3].image" />
-              <img class="rounded border" :src="films[fling_index + 4].image" />
-              <img class="rounded border" :src="films[fling_index + 5].image" />
+              <img class="rounded border" :src="movies[fling_index + 3].image" />
+              <img class="rounded border" :src="movies[fling_index + 4].image" />
+              <img class="rounded border" :src="movies[fling_index + 5].image" />
             </div>
           </div>
         </div>

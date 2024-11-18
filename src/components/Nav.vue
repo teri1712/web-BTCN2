@@ -26,7 +26,7 @@ export default {
   >
     <div
       id="home"
-      @click="submitQuery(null)"
+      @click="$emit('onHomePressed')"
       :style="{
         color: !light_mode ? 'white' : 'black',
       }"
