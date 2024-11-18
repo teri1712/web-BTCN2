@@ -1,4 +1,4 @@
-import ZoomOutImg from './ImgZoomOut.vue'
+import ZoomOutImg from './ImgZoomOut.js'
 import dbFetch from '../db/provider'
 export default {
   props: {

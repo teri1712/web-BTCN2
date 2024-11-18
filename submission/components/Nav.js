@@ -1,5 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
-<script>
 export default {
   props: {
     light_mode: Boolean,
@@ -14,9 +12,8 @@ export default {
       this.$emit('searchAction', query)
     },
   },
-}
-</script>
-<template>
+  template: `
+  
   <div
     id="nav"
     class="m-1 rounded border"
@@ -49,23 +46,5 @@ export default {
         <button class="btn btn-outline-success my-2 my-sm-0 ml-1" type="submit">Search</button>
       </form>
     </div>
-  </div>
-</template>
-<style>
-#nav {
-  padding-left: 10px;
-  padding-right: 10px;
-  flex: 0 0 50px;
-  line-height: 50px;
+  </div>`,
 }
-#home {
-  float: left;
-  cursor: pointer;
-}
-.form-inline {
-  display: inline;
-}
-.search-container {
-  float: right;
-}
-</style>
