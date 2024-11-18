@@ -1,4 +1,3 @@
-<script>
 export default {
   data() {
     this.view_info_interval = null
@@ -39,11 +38,7 @@ export default {
       }, 20)
     },
   },
-}
-</script>
-
-<template>
-  <div
+  template: ` <div
     class="zoom-out"
     @mouseenter="openViewInfo"
     @mouseleave="closeViewInfo"
@@ -60,37 +55,5 @@ export default {
       <img :src="book.image" />
       <p>{{ book.title }}</p>
     </div>
-  </div>
-</template>
-
-<style>
-.zoom-out {
-  height: 180px;
-  flex: 1 0;
-  margin: 1px;
-  cursor: pointer;
-  position: relative;
+  </div>`,
 }
-.zoom-out img {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-}
-.img-info {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform-origin: center center;
-  background-color: #181818;
-  width: 100%;
-  z-index: 2;
-}
-.img-info p {
-  margin: 0;
-  color: white;
-  font-size: 20px;
-  font-weight: 700;
-  padding: 5px;
-  padding-top: 0;
-}
-</style>

@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script>
 import Revuenue from './Revenue.vue'
-import Fling from './Fling.vue'
+import Fling from './Fling'
 export default {
   props: {
     light_mode: Boolean,
