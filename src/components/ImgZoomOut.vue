@@ -46,9 +46,9 @@ export default {
 
 <template>
   <div class="zoom-out" @mouseenter="openViewInfo" @mouseleave="closeViewInfo">
-    <img :src="imageUrl" />
+    <img class="rounded border" :src="imageUrl" />
     <div
-      class="img-info"
+      class="img-info rounded border"
       v-if="viewInfo"
       :style="{
         transform: 'scale(' + info_scale + ')',

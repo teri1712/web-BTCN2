@@ -64,6 +64,7 @@ export default {
     <div id="show-book">
       <div>
         <img
+          class="rounded border"
           id="main-book"
           :src="current_book"
           :style="{

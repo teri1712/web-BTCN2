@@ -91,9 +91,9 @@ export default {
             :style="{ visibility: fling_left_visible ? 'visible' : 'hidden' }"
           >
             <div class="film-list">
-              <img :src="films[fling_index]" />
-              <img :src="films[fling_index + 1]" />
-              <img :src="films[fling_index + 2]" />
+              <img class="rounded border" :src="films[fling_index]" />
+              <img class="rounded border" :src="films[fling_index + 1]" />
+              <img class="rounded border" :src="films[fling_index + 2]" />
             </div>
           </div>
           <div
@@ -101,9 +101,9 @@ export default {
             :style="{ visibility: fling_right_visible ? 'visible' : 'hidden' }"
           >
             <div class="film-list">
-              <img :src="films[fling_index + 3]" />
-              <img :src="films[fling_index + 4]" />
-              <img :src="films[fling_index + 5]" />
+              <img class="rounded border" :src="films[fling_index + 3]" />
+              <img class="rounded border" :src="films[fling_index + 4]" />
+              <img class="rounded border" :src="films[fling_index + 5]" />
             </div>
           </div>
         </div>

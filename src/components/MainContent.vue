@@ -13,14 +13,14 @@ export default {
 }
 </script>
 <template>
-  <div id="middle" class="m-1">
+  <div id="main-content" class="m-1">
     <Revuenue />
     <Fling section_name="Most Popular" zIndex="2" />
     <Fling section_name="Top Rating" zIndex="1" />
   </div>
 </template>
 <style>
-#middle {
+#main-content {
   flex: 1 0;
   display: flex;
   flex-direction: column;
