@@ -1,4 +1,3 @@
-
 import dbFetch from '../db/provider'
 
 export default {
@@ -61,7 +60,8 @@ export default {
       this.performSwitchBook(index)
     },
   },
-}
+  template: `
+  
   <div class="revenue mb-1">
     <div id="back" @click="switchPrevBook">
       <i class="fa-solid fa-angle-left"></i>
@@ -100,4 +100,5 @@ export default {
     <div id="next" @click="switchNextBook">
       <i class="fa-solid fa-angle-right"></i>
     </div>
-  </div>
+  </div>`,
+}

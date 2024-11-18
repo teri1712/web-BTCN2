@@ -307,3 +307,42 @@ label {
   justify-content: center;
   flex: 0 0 50px;
 }
+
+/*Search*/
+
+.search-result {
+  flex: 1 0;
+}
+.film-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.book-element p {
+  text-align: center;
+  margin: 3px;
+}
+.book-element img {
+  width: 100%;
+  cursor: pointer;
+}
+.element-title {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+.element-type {
+  font-size: 1em;
+  color: grey;
+  font-style: italic;
+}
+
+/*App*/
+
+#app {
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+  margin-right: 50px;
+  height: 100%;
+  overflow-x: hidden;
+}

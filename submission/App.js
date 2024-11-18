@@ -1,4 +1,3 @@
-<script>
 import Header from '../src/components/Header.vue'
 import Nav from '../src/components/Nav.vue'
 import MainContent from '../src/components/MainContent.vue'
@@ -61,9 +60,8 @@ export default {
       document.documentElement.style.backgroundColor = light ? 'white' : '#2D2E31'
     },
   },
-}
-</script>
-<template>
+  template: `
+  
   <div id="app">
     <Header v-model="light_mode" />
     <Nav @searchAction="handleSearch" @onHomePressed="handleHomePressed" :light_mode="light_mode" />
@@ -75,16 +73,5 @@ export default {
     <MovieDetail v-if="movieId != null" :movieId="movieId" />
     <ActorDetail v-if="actorInfo != null" :info="actorInfo" />
     <Footer :light_mode="light_mode" />
-  </div>
-</template>
-
-<style>
-#app {
-  display: flex;
-  flex-direction: column;
-  margin-left: 50px;
-  margin-right: 50px;
-  height: 100%;
-  overflow-x: hidden;
+  </div>`,
 }
-</style>
