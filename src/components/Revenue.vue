@@ -24,7 +24,6 @@ export default {
       if (this.top5_books.length === 0) {
         return
       }
-      console.log(this.top5_books)
       this.current_index = 0
       this.dummy_index = 0
     },
