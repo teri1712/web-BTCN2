@@ -92,3 +92,9 @@
 .film-fling img {
   margin: 1px;
 }
+/*Footer*/
+.footer {
+  flex: 0 0 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
